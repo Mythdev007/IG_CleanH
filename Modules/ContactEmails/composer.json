@@ -1,0 +1,24 @@
+{
+  "name": "Vaance/contactemails",
+  "description": "",
+  "authors": [
+    {
+      "name": "Vaance - Business Application Platform",
+      "email": "a.vacca@vaance.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Modules\\ContactEmails\\Providers\\ContactEmailsServiceProvider"
+      ],
+      "aliases": {
+      }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\ContactEmails\\": ""
+    }
+  }
+}

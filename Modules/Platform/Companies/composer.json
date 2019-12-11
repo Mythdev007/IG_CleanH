@@ -1,0 +1,25 @@
+{
+    "name": "Vaance/companies",
+    "description": "",
+    "authors": [
+        {
+            "name": "Vaance - Business Application Platform",
+            "email": "a.vacca@vaance.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Platform\\Companies\\Providers\\CompaniesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Platform\\Companies\\": ""
+        }
+    }
+}

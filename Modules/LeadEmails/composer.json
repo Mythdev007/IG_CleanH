@@ -1,0 +1,24 @@
+{
+  "name": "Vaance/leademails",
+  "description": "",
+  "authors": [
+    {
+      "name": "Vaance - Business Application Platform",
+      "email": "a.vacca@vaance.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Modules\\LeadEmails\\Providers\\LeadEmailsServiceProvider"
+      ],
+      "aliases": {
+      }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\LeadEmails\\": ""
+    }
+  }
+}

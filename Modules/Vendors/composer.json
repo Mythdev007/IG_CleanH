@@ -1,0 +1,15 @@
+{
+    "name": "Vaance/vendors",
+    "description": "",
+    "authors": [
+        {
+            "name": "Vaance - Business Application Platform",
+            "email": "a.vacca@vaance.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Modules\\Vendors\\": ""
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.form-group.form-line.focused {
+    border-bottom: 2px solid #0096dc;
+  }
+  .form-group.form-line.focused .form-label {
+    font-weight: normal;
+    color: #aaa;
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    cursor: text;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    font-size: 12px;
+}
+/* .section_title .form-control-static {
+  display: none;
+} */
+#kvFileinputModal {
+  z-index: 10090 !important;
+}

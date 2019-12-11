@@ -1,0 +1,16 @@
+{
+    "name": "ContactMailinglists",
+    "alias": "contactmailinglists",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\ContactMailinglists\\Providers\\ContactMailinglistsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

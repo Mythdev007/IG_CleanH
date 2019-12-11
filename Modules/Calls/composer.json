@@ -1,0 +1,24 @@
+{
+  "name": "Vaance/calls",
+  "description": "",
+  "authors": [
+    {
+      "name": "Vaance - Business Application Platform",
+      "email": "a.vacca@vaance.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Modules\\Calls\\Providers\\CallsServiceProvider"
+      ],
+      "aliases": {
+      }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\Calls\\": ""
+    }
+  }
+}

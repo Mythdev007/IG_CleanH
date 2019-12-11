@@ -1,0 +1,25 @@
+{
+    "name": "Vaance/testimonials",
+    "description": "",
+    "authors": [
+        {
+            "name": "Vaance - Business Application Platform",
+            "email": "a.vacca@vaance.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Testimonials\\Providers\\TestimonialsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Testimonials\\": ""
+        }
+    }
+}

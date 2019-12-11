@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,eAAE;EACE,OAAO,EAAE,cAAa;;AAG9B,YAAa;EACT,aAAa,EAAE,GAAG;;AAGtB,eAAe;EACX,MAAM,EAAE,OAAO",
+"sources": ["VAANCE_Invoice.scss"],
+"names": [],
+"file": "VAANCE_Invoice.css"
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Vaance/contactrequests",
+    "description": "",
+    "authors": [
+        {
+            "name": "Vaance - Business Application Platform",
+            "email": "a.vacca@vaance.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ContactRequests\\Providers\\ContactRequestsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ContactRequests\\": ""
+        }
+    }
+}
