@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,aAAG;EACD,OAAO,EAAE,cAAc;;AAI3B,YAAa;EACX,aAAa,EAAE,GAAG;;AAGpB,eAAgB;EACd,MAAM,EAAE,OAAO",
+"sources": ["VAANCE_Order.scss"],
+"names": [],
+"file": "VAANCE_Order.css"
+}

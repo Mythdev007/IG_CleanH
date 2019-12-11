@@ -1,0 +1,24 @@
+﻿.dd-handle {
+    background-color: #f9f9f9 !important;
+
+    &:hover {
+        color: #0096dc;
+    }
+}
+
+.nestable-dark-theme {
+    .dd-handle {
+        background: #ccc !important;
+        border: 1px solid #999 !important;
+    }
+}
+
+.dd3-handle {
+    background: #999 !important;
+}
+
+.dd3-content {
+    &:hover {
+        color: #0096dc;
+    }
+}

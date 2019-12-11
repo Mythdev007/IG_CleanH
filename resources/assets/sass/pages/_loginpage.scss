@@ -1,0 +1,59 @@
+﻿
+.login-page {
+
+
+    overflow-x: hidden;
+
+    .login-box {
+
+
+
+        margin: 0 auto;
+        max-width: 600px;
+        margin-top: 5%!important;
+
+        .login-right{
+            h1{
+                font-weight: 100;
+            }
+        }
+
+        .msg {
+            color: #555;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #00BCD4;
+        }
+
+        .logo {
+            a {
+                font-size: 36px;
+                display: block;
+                width: 100%;
+                text-align: center;
+                color: #fff;
+            }
+
+            small {
+                display: block;
+                width: 100%;
+                text-align: center;
+                color: #fff;
+                margin-top: -5px;
+            }
+            img {
+                max-width: 300px;
+            }
+
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 100%!important;
+        }
+    }
+}

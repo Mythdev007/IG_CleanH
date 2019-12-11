@@ -1,0 +1,94 @@
+﻿@import '_theme-color-variables';
+
+.theme-italgas {
+
+    .navbar {
+        background: $theme-italgas;
+        background: url(/images/top-bar-bg.jpg) no-repeat no-repeat;
+        background-size: cover;
+    }
+
+    .navbar-brand {
+        color: $theme-italgas-navbar-brand;
+
+        &:hover {
+            color: $theme-italgas-navbar-brand_hover;
+        }
+
+        &:active {
+            color: $theme-italgas-navbar-brand_active;
+        }
+
+        &:focus {
+            color: $theme-italgas-navbar-brand_focus;
+        }
+    }
+
+    .nav {
+        > li {
+            > a {
+                color: $theme-italgas-nav-anchor;
+
+                &:hover {
+                    background-color: $theme-italgas-nav-anchor_hover;
+                }
+
+                &:focus {
+                    background-color: $theme-italgas-nav-anchor_focus;
+                }
+            }
+        }
+
+        .open {
+            > a {
+                background-color: $theme-italgas-nav-anchor-opened;
+
+                &:hover {
+                    background-color: $theme-italgas-nav-anchor-opened_hover;
+                }
+
+                &:focus {
+                    background-color: $theme-italgas-nav-anchor-opened_focus;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color: $theme-italgas-bar;
+    }
+
+    .sidebar {
+        .menu {
+            .list {
+                li.active {
+                    background-color: $theme-italgas-menu-list-active;
+
+                    > :first-child {
+                        i, span {
+                            color: $theme-italgas;
+                        }
+                    }
+                }
+
+                .toggled {
+                    background-color: $theme-italgas-menu-list-toggled;
+                }
+
+                .ml-menu {
+                    background-color: $theme-italgas-menu-list-submenu;
+                }
+            }
+        }
+
+        .legal {
+            background-color: $theme-italgas-legal-bg;
+
+            .copyright {
+                a {
+                    color: $theme-italgas !important;
+                }
+            }
+        }
+    }
+}
