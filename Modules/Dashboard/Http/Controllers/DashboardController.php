@@ -99,7 +99,7 @@ class DashboardController extends ModuleCrudController
 
         $view->with('ticketDatatable', $ticketDatatable->html());    
 
-        /**  this part is for quick quitoe*/
+        /**  this part is for fast quote*/
         $view->with('show_fields', $this->showFields);
 
         $createForm = $this->form($this->formClass, [
@@ -140,7 +140,6 @@ class DashboardController extends ModuleCrudController
             'value' => ''
         ]);
 
-        
         $createForm->add('mass_action_ids', 'hidden', [
             'value' => '',
         ]);
