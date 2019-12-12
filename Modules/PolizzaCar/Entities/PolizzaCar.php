@@ -81,6 +81,7 @@ class PolizzaCar extends Model implements Ownable
     public $fillable = [
         'user_id',
         'group_id',
+        'owned_by_id',
         'buyer_id',
         'procurement_id',
         'status_id',

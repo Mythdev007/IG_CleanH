@@ -21,3 +21,8 @@ Route::group(['middleware' => ['web','permission:company.settings'], 'prefix' =>
     Route::resource('groups', 'GroupsController', []);
 });
 
+
+Route::group(['middleware' => ['web'], 'namespace' => 'Modules\Platform\User\Http\Controllers'], function () {
+	Route::get('/password/custom_reset/{verification_token}', ['as' => 'password.edit', 'uses' => 'PasswordController@edit']);
+	Route::post('/password/custom_update', 'PasswordController@update')->name('password.custom.update');
+});

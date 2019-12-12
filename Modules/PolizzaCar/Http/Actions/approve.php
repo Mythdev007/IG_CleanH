@@ -8,6 +8,7 @@ use App\Notifications\UserInvitationNotification;
 use Illuminate\Support\Str;
 use Modules\PolizzaCar\Entities\PolizzaCarProcurement;
 use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
+use Modules\Core\Notifications\GenericNotification;
 
         if ($this->permissions['browse'] != '' && !\Auth::user()->hasPermissionTo($this->permissions['browse'])) {
             flash(trans('core::core.you_dont_have_access'))->error();
@@ -52,8 +53,8 @@ use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
             $user->roles()->attach(5);
             // user created with role 5
 
-            // $user->notify(new UserInvitationNotification($polizza, 'invite'));
             //user notified with email where he will set password
+            $user->notify(new UserInvitationNotification($polizza, 'invite'));
 
             
             $polizza = PolizzaCar::find($entity->id);
@@ -88,10 +89,10 @@ use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
                 $placeholder->setIcon('assignment');
                 $placeholder->setUrl(route('polizzacar.polizzacar.show', $polizza));
                 
-                // $user->notify(new GenericNotification($placeholder));
+                $user->notify(new GenericNotification($placeholder));
+                $user->notify(new UserInvitationNotification($polizza, 'send_to_contractor')); 
 
                 $Supervisor = User::where('id', 2)->first();
-
 
                 $messaggio = 'Preventivo n. '. $entity->id .' - '. $entity->company_name .' approvato. In attesa di Documenti firmati.';
     
@@ -103,14 +104,12 @@ use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
                 $placeholder->setIcon('assignment');
                 $placeholder->setUrl(route('polizzacar.polizzacar.show', $polizza));
     
-                // $Supervisor->notify(new GenericNotification($placeholder));
+                $Supervisor->notify(new GenericNotification($placeholder));
 
-                $polizza = PolizzaCar::find($entity->id);
-
-                $user = auth()->user();
+                $logged_user = auth()->user();
 
                 activity()
-                    ->causedBy($user)
+                    ->causedBy($logged_user)
                     ->performedOn($polizza)
                     ->log(trans('PolizzaCar::PolizzaCar.invite_sent'));
                 
@@ -119,6 +118,8 @@ use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
 
         $polizza->update([
             'status_id'      => 3, // Waiting Signed Documents
+            'owned_by_type'  => 'Modules\Platform\User\Entities\User',
+            'owned_by_id'    => $user->id
         ]);
 
         // $procurement = PolizzaCarProcurement::where('id', $entity->procurement_id)->first();

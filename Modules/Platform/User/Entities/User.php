@@ -144,6 +144,7 @@ class User extends Authenticatable implements CanBeOwner, JWTSubject
         'name',
         'email',
         'password',
+        'verification_token',
         'is_active',
         'last_name',
         'first_name',

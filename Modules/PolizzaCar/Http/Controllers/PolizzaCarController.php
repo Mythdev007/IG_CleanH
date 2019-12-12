@@ -99,16 +99,7 @@ class PolizzaCarController extends ModuleCrudController
             }
         }
         
-        if (in_array($user->role_id, [1, 2])) { // Admin & Supervisor
-            if ($this->entity->status_id == 2) { // waiting approval
-                $this->customShowButtons[] = array(
-                    'href' => route('polizzacar.polizzacar.approve', $this->entity->id),
-                    'attr' => [
-                    'class' => 'btn btn-crud bg-orange waves-effect pull-right',                       
-                    ],
-                    'label' => trans('PolizzaCar::PolizzaCar.approve')
-                );
-            }
+        if (in_array($roleName, ['admin', 'strategica'])) { // Admin & Strategica
             if ($this->entity->status_id == 4) { // waiting verify
                 $this->customShowButtons[] = array(
                     'href' => route('polizzacar.polizzacar.sendOrder', $this->entity->id),
@@ -440,9 +431,84 @@ class PolizzaCarController extends ModuleCrudController
     public function show($identifier)
     {   
 
-        $sourcePath = __DIR__.'/../Actions/show.php';
+               
+        if ($this->permissions['browse'] != '' && !\Auth::user()->hasPermissionTo($this->permissions['browse'])) {
+            flash(trans('core::core.you_dont_have_access'))->error();
+            return redirect()->route($this->routes['index']);
+        }
 
-        include($sourcePath);
+        $repository = $this->getRepository();
+
+        $entity = $repository->find($identifier);
+
+
+        $this->entity = $entity;
+
+        if (empty($entity)) {
+            flash(trans('core::core.entity.entity_not_found'))->error();
+
+            return redirect(route($this->routes['index']));
+        }
+
+        if ($this->blockEntityOwnableAccess()) {
+            flash(trans('core::core.you_dont_have_access'))->error();
+            return redirect()->route($this->routes['index']);
+        }
+
+        $this->entityIdentifier = $entity->id;
+
+        $this->entity = $entity;
+
+        $this->beforeShow(request(), $entity);
+
+        if (request('mode') == 'json') {
+            return response()->json($this->entity);
+        }
+
+        $view = view('polizzacar::show');
+
+        $view->with('entity', $entity);
+        $view->with('show_fields', $this->showFields);
+        $view->with('show_fileds_count', count($this->showFields));
+
+        $view->with('next_record', $repository->next($entity));
+        $view->with('prev_record', $repository->prev($entity));
+        $view->with('disableNextPrev', $this->disableNextPrev);
+
+        $this->setupCustomButtons();
+        $this->setupActionButtons();
+        $view->with('customShowButtons', $this->customShowButtons);
+        $view->with('actionButtons',$this->actionButtons);
+        $view->with('commentableExtension', false);
+        $view->with('actityLogDatatable', null);
+        $view->with('attachmentsExtension', true);
+        $view->with('entityIdentifier', $this->entityIdentifier);
+
+
+        $view->with('hasExtensions', false);
+
+        $view->with('relationTabs', $this->setupRelationTabs($entity));
+
+        $view->with('baseIcons', $this->baseIcons);
+
+        /*
+         * Extensions
+         */
+
+        if (in_array(self::COMMENTS_EXTENSION, class_uses($this->entity))) {
+            $view->with('commentableExtension', true);
+            $view->with('hasExtensions', true);
+        }
+        if (in_array(self::ACTIVITY_LOG_EXTENSION, class_uses($this->entity))) {
+            $activityLogDataTable = \App::make(ActivityLogDataTable::class);
+            $activityLogDataTable->setEntityData(get_class($entity), $entity->id);
+            $view->with('actityLogDatatable', $activityLogDataTable->html());
+            $view->with('hasExtensions', true);
+        }
+        if (in_array(self::ATTACHMENT_EXTENSION, class_uses($this->entity))) {
+            $view->with('attachmentsExtension', true);
+            $view->with('hasExtensions', true);
+        }
 
         /*
          * add pdf parts.
@@ -520,8 +586,6 @@ class PolizzaCarController extends ModuleCrudController
         $sourcePath = __DIR__.'/../Actions/printPDF-Cert.php';
 
         include($sourcePath);
-
-        
 
         return $pdf->Output($identifier . '_8_Certificato_CAR_CHUBB_ITALGAS_0719.pdf', 'I'); 
     }
@@ -693,7 +757,7 @@ class PolizzaCarController extends ModuleCrudController
         $polizza->order_sent_at = \Carbon\Carbon::now();
         
 
-            $Supervisor = User::where('role_id', 2)->first();
+            $Supervisor = User::where('id', 2)->first();
 
             $messaggio = 'Polizza n. '. $polizza->id .' - '. $polizza->company_name .' inviata alla compagnia.';
 
@@ -703,7 +767,7 @@ class PolizzaCarController extends ModuleCrudController
                 $placeholder->setColor('bg-blue');
                 $placeholder->setIcon('compare_arrows');
                 $placeholder->setUrl(route('polizzacar.polizzacar.show', $polizza));
-            // $Supervisor->notify(new GenericNotification($placeholder));
+            $Supervisor->notify(new GenericNotification($placeholder));
            
 
             $user = User::where('email', $polizza->company_email)->first();
@@ -715,7 +779,7 @@ class PolizzaCarController extends ModuleCrudController
                 $placeholder->setIcon('compare_arrows');
                 $placeholder->setUrl(route('polizzacar.polizzacar.show', $polizza));
 
-            // $user->notify(new GenericNotification($placeholder));
+            $user->notify(new GenericNotification($placeholder));
 
         flash(trans('PolizzaCar::PolizzaCar.order_request'))->success();
             // return redirect(route($this->routes['index']));

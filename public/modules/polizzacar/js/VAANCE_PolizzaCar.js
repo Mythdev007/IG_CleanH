@@ -242,7 +242,6 @@ var VAANCE_PolizzaCar = {
                     // $('#signAjaxForm').modal('hide');
                     signurl = Url.url;
                 });
-                
             }
         });
 

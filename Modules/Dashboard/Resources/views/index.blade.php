@@ -242,6 +242,7 @@
 
     <script type="text/javascript" src="{{ asset('vaance/plugins/chartjs/Chart.bundle.js')}}"></script>
     <script src="{!! Module::asset('dashboard:js/VAANCE_Dashboard.js') !!}"></script>
+    <script src="{!! Module::asset('polizzacar:js/VAANCE_PolizzaCar.js') !!}"></script>
 
     {!! $leadOverview->script() !!}
     {!! $incomeVsExpense->script() !!}

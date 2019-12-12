@@ -81,3 +81,31 @@ use Modules\Platform\Core\Datatable\ActivityLogDataTable;
             $view->with('attachmentsExtension', true);
             $view->with('hasExtensions', true);
         }
+
+        /*
+         * add pdf parts.
+         */
+        if (!empty($entity->pdf_signed_contract) || !empty($entity->pdf_payment_proof)) {
+            $view->with('hasPdfs', true);
+            $pdfshowFields = [
+                'signed_pdf' => [
+                    'pdf_signed_contract' => [
+                        'type' => 'aTag',
+                        'col-class' => 'col-lg-5 col-md-5 col-sm-5 col-xs-5',
+                        'href' => route('polizzacar.polizzacar.showPDF', ['pdf'=>$entity->pdf_signed_contract]),
+                    ],
+                    'pdf_payment_proof' => [
+                        'type' => 'aTag',
+                        'col-class' => 'col-lg-5 col-md-5 col-sm-5 col-xs-5',
+                        'href' => route('polizzacar.polizzacar.showPDF', ['pdf'=>$entity->pdf_payment_proof]),
+                    ],
+                ],
+            ];
+            $view->with('pdfshowFields', $pdfshowFields);
+        } else {
+            $view->with('hasPdfs', false);
+        }
+
+        \JavaScript::put([
+            'polizza_Id' => $entity->id,
+        ]);
