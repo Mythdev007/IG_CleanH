@@ -319,22 +319,21 @@ var VAANCE_PolizzaCar = {
             });
         });
 
-        /* $(document).on('click', '#module_form', function (e) {
+        $(document).on('click', '.policysave', function (e) {
             e.preventDefault();
-            
+            console.log('here');
             var car_p1_limit_amount = parseFloat($('#car_p1_limit_amount').val() != '' ? $('#car_p1_limit_amount').val().replaceAll(',','').replaceAll('€ ','') : 0);
+            var car_p2_limit_amount = parseFloat($('#car_p2_limit_amount').val() != '' ? $('#car_p2_limit_amount').val().replaceAll(',','').replaceAll('€ ','') : 0);
+            var car_p3_limit_amount = parseFloat($('#car_p3_limit_amount').val() != '' ? $('#car_p3_limit_amount').val().replaceAll(',','').replaceAll('€ ','') : 0);
+            $('#car_p1_limit_amount').val() = car_p1_limit_amount;
+            $('#car_p2_limit_amount').val() = car_p2_limit_amount;
+            $('#car_p3_limit_amount').val() = car_p3_limit_amount;
             
-            if(car_p1_limit_amount < 15000000){
-                document.getElementById("module_form").submit();
-            }                
-            else{
-                $('#confirmlimit').modal({show:true});
-                console.log(car_p1_limit_amount);
-            }
-                
+            document.getElementById("module_form").submit();
+           
         });
 
-        $(document).on('click','.confirm', function(e){
+        /* $(document).on('click','.confirm', function(e){
             e.preventDefault();
             
             var car_p1_limit_amount = parseFloat($('#car_p1_limit_amount').val() != '' ? $('#car_p1_limit_amount').val().replaceAll(',','').replaceAll('€ ','') : 0);
@@ -347,7 +346,7 @@ var VAANCE_PolizzaCar = {
             }                
             // else
             //     $('#confirmlimit').modal('show');
-        });*/
+        }); */
     }
 
 };

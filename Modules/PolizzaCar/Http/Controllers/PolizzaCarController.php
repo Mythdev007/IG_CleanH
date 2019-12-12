@@ -108,6 +108,13 @@ class PolizzaCarController extends ModuleCrudController
                     ],
                     'label' => trans('PolizzaCar::PolizzaCar.send_order')
                 );
+                $this->customShowButtons[] = array(
+                    'href' => route('polizzacar.polizzacar.downloadCsv'),
+                    'attr' => [
+                    'class' => 'btn btn-crud bg-blue waves-effect pull-right',
+                    ],
+                    'label' => trans('PolizzaCar::PolizzaCar.download_csv')
+                );
             }
             if ($this->entity->status_id == 5) { // elaborazione
                 $this->customShowButtons[] = array(
@@ -778,10 +785,10 @@ class PolizzaCarController extends ModuleCrudController
                 $placeholder->setColor('bg-blue');
                 $placeholder->setIcon('compare_arrows');
                 $placeholder->setUrl(route('polizzacar.polizzacar.show', $polizza));
+            if(isset($user))
+                $user->notify(new GenericNotification($placeholder));
 
-            $user->notify(new GenericNotification($placeholder));
-
-        flash(trans('PolizzaCar::PolizzaCar.order_request'))->success();
+            flash(trans('PolizzaCar::PolizzaCar.order_request'))->success();
             // return redirect(route($this->routes['index']));
             return redirect()->route('polizzacar.polizzacar.show',$polizza->id);
 
@@ -1602,10 +1609,10 @@ class PolizzaCarController extends ModuleCrudController
                     $pdfFile = $polizza->company_name.'_Certificato_Firmato.pdf';
                     $fullPath = storage_path(env('UPLOAD_URL').'/' . $pdfFile );
                     
-                    /* if (!\File::exists($fullPath))
+                    if (!\File::exists(storage_path(env('UPLOAD_URL'))))
                     {
-                        \File::makeDirectory($fullPath, 0755, true, true);
-                    } */
+                        \File::makeDirectory(storage_path(env('UPLOAD_URL')), 0755, true, true);
+                    }
 
                     file_put_contents($fullPath, file_get_contents($docStream->getPathname()));
             
