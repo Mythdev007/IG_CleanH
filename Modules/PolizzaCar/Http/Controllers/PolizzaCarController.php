@@ -57,6 +57,7 @@ class PolizzaCarController extends ModuleCrudController
     protected function setupCustomButtons()
     {
         $user = auth()->user();
+        
 
         if ($this->entity->pdf_signed_contract == '') { // se non c'e contratto firmato
             $this->customShowButtons[] = array(
@@ -127,7 +128,8 @@ class PolizzaCarController extends ModuleCrudController
             }
         }
         if ($this->entity->status_id == 3) {
-                $this->customShowButtons[] = array(
+            
+            $this->customShowButtons[] = array(
                     'href' => route('polizzacar.polizzacar.print', $this->entity->id),
                     'attr' => [
                     'class' => 'btn btn-crud bg-blue waves-effect pull-right',
@@ -147,6 +149,7 @@ class PolizzaCarController extends ModuleCrudController
                 'href' => '#',
                 'attr' => [
                 'class' => 'btn btn-crud bg-green waves-effect pull-right btnUploadFile2',
+                'id' => 'uploadproof'                
                 ],
                 'label' => trans('PolizzaCar::PolizzaCar.upload_payment_proof')
             );
@@ -472,6 +475,7 @@ class PolizzaCarController extends ModuleCrudController
             return response()->json($this->entity);
         }
 
+        
         $view = view('polizzacar::show');
 
         $view->with('entity', $entity);
@@ -1002,8 +1006,8 @@ class PolizzaCarController extends ModuleCrudController
             
         }  else {
             // change status.
-            if (empty($polizza->pdf_payment_proof))//when uploading 2 files , update status
-                $polizza->status_id = 4;
+            // if (empty($polizza->pdf_payment_proof))//when uploading 2 files , update status
+            //     $polizza->status_id = 4;
             $polizza->save();
 
             // send email to Supervisor
@@ -1075,7 +1079,7 @@ class PolizzaCarController extends ModuleCrudController
             //flash(trans('core::core.can_not_find_supervisor'))->error();        
         } else {
             // change status.
-            if (empty($polizza->pdf_signed_contract)) //when uploading 2 files , update status
+            if (!empty($polizza->pdf_signed_contract)) //when uploading 2 files , update status
                 $polizza->status_id = 4;
             $polizza->save();
 

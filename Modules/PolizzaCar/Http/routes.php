@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web','permission:polizzacar.browse'],'prefix'=>'
     
     Route::resource('polizzacar', 'PolizzaCarController');
     
-    Route::get('polizzacar/download-csv/', 'PolizzaCarController@downloadCsv')->name('polizzacar.downloadCsv');
+    Route::get('polizzacar/polizzacar/download-csv/', 'PolizzaCarController@downloadCsv')->name('polizzacar.downloadCsv');
     
     Route::get('polizzacar/approve/{id}', 'PolizzaCarController@approvePolizzaCar')->name('polizzacar.approve');
 

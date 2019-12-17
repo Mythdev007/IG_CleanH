@@ -28,6 +28,7 @@ use Modules\Platform\Notifications\Entities\NotificationPlaceholder;
 use Modules\Platform\User\Entities\Group;
 use Modules\Platform\User\Entities\User;
 use Stringy\Stringy;
+use Validator;
 
 /**
  * Class ModuleCrudController
@@ -1115,6 +1116,26 @@ abstract class ModuleCrudController extends AppBaseController
 
         return redirect(route($this->routes['index']));
     } 
+
+    protected function beforeStore($request)
+    {
+        var_dump('validator');
+        Validator::make($request->all(), [
+            'car_p1_limit_amount' => 'required|nullable|numeric|max:1500000',
+            'car_p2_limit_amount' => 'required|nullable|numeric|max:500000',
+            'car_p3_limit_amount'=> 'required|nullable|numeric|max:500000',
+        ])->validate();
+    }
+
+    protected function beforeUpdate($request, $entity, $input)
+    {
+        var_dump('validator');
+        Validator::make($request->all(), [
+            'car_p1_limit_amount' => 'required|nullable|numeric|max:1500000',
+            'car_p2_limit_amount' => 'required|nullable|numeric|max:500000',
+            'car_p3_limit_amount'=> 'required|nullable|numeric|max:500000',
+        ])->validate();
+    }
 
     /**
      * Setup Assigned (User|Group)
