@@ -12,6 +12,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Krucas\Settings\Facades\Settings;
 use Modules\SentEmails\LaravelDatabaseEmails\SendEmailsCommand;
+use Modules\PolizzaCar\Service\CsvExportService;
 
 class Kernel extends ConsoleKernel
 {
@@ -46,6 +47,18 @@ class Kernel extends ConsoleKernel
         // Set information about cron last run
         $schedule->call(static function () {
             Settings::set('cron_last_run', Carbon::now());
+            $time = \Modules\Platform\Core\Helper\UserHelper::formatUserDateTime(Carbon::now());
+            if(substr_compare($time, env('FTP_EXPORT_TIME1'),11,5) == 0 || substr_compare($time, env('FTP_EXPORT_TIME2'),11,5) == 0)
+            {
+                // $file_local = Storage::disk('exports')->get('_20191213.csv');
+                // $file_ftp = Storage::disk('ftp')->put('_20191213.csv', $file_local); 
+                (new CsvExportService())->uploadToFTP();               
+            }
+            if(substr_compare($time, env('FTP_RESPOND_TIME1'),11,5) == 0 || substr_compare($time, env('FTP_RESPOND_TIME2'),11,5) == 0)
+            {
+                //Storage::download('_20191213.csv');
+                (new CsvExportService())->exportCsv();
+            }
         })->everyMinute();
 
     }

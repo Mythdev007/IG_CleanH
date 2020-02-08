@@ -65,6 +65,17 @@ class UserSeeder extends Seeder
             'access_to_all_entity' => 1,
             'language_id' => 2,
             'theme' => 'theme-italgas'
+        ],
+        [
+            'id' => 4,
+            'email' => 'a.forte@vaance.com',
+            'is_active' => 1,
+            'first_name' => 'Angelo Forte',
+            'last_name' => '(Vaance)',
+            'name' => 'Angelo Forte (Vaance)',
+            'access_to_all_entity' => 0,
+            'language_id' => 2,
+            'theme' => 'theme-italgas'
         ]
     ];
 
@@ -108,6 +119,7 @@ class UserSeeder extends Seeder
 
         User::find(2)->syncRoles(2);
         User::find(3)->syncRoles(3);
+        User::find(4)->syncRoles(4);
 
         DB::table('groups')->insert(CrudHelper::setDatesInArray(self::$_GROUPS));
     }

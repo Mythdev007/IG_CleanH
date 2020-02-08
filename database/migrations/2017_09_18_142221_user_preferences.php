@@ -30,7 +30,7 @@ class UserPreferences extends Migration
             $table->string('secondary_email')->nullable();
 
             $table->boolean('left_panel_hide')->default(0);
-            $table->string('theme')->default('theme-red')->nullable();
+            $table->string('theme')->default('theme-italgas')->nullable();
 
             $table->string('address_country')->nullable();
             $table->string('address_state')->nullable();

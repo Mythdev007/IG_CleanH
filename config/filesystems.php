@@ -55,12 +55,30 @@ return [
             'visibility' => 'public',
         ],
 
+        'exports' => [
+            'driver' => 'local',
+            'root' => storage_path('app/exports'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
+        ],
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => 'ftp.example.com',
+            'username' => 'your-username',
+            'password' => 'your-password',
+        
+            // Optional FTP Settings...
+            // 'port' => 21,
+            // 'root' => '',
+            // 'passive' => true,
+            // 'ssl' => true,
+            // 'timeout' => 30,
         ],
 
     ],

@@ -44,6 +44,7 @@ class PolizzaCarRequest extends Request
                 'car_p1_limit_amount' => 'required|nullable|max:15000000',
                 'car_p2_limit_amount' => 'required|nullable|max:5000000',
                 'car_p3_limit_amount'=> 'required|nullable|max:5000000',
+
                 'risk_id' => 'sometimes|required|nullable',
                 'coeff_tariffa' => 'sometimes|required|nullable',
                 'tax_rate' => 'sometimes|required|nullable'
@@ -60,7 +61,10 @@ class PolizzaCarRequest extends Request
         return [
             'company_name.required' => 'Ragione Sociale obbligatorio',
             'company_vat.required' => 'Partita IVA obbligatoria',
-            'company_vat.min' => 'Partita IVA non valida'
+            'company_vat.min' => 'Partita IVA non valida',
+            'car_p1_limit_amount.max' => 'max value is 15000000',
+            'car_p2_limit_amount.max' => 'max value is 5000000',
+            'car_p3_limit_amount.max'=> 'max value is 5000000',
         ];
     }
 }
