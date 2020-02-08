@@ -41,7 +41,7 @@ class PolizzaCarRequest extends Request
                 'works_duration_mm' => 'sometimes|required|nullable',
                 'works_place_city' => 'sometimes|required|nullable',
                 'works_place_pr' => 'sometimes|required|nullable',
-                'car_p1_limit_amount' => 'required|nullable|max:5000000',
+                'car_p1_limit_amount' => 'required|nullable|max:15000000',
                 'car_p2_limit_amount' => 'required|nullable|max:5000000',
                 'car_p3_limit_amount'=> 'required|nullable|max:5000000',
                 'risk_id' => 'sometimes|required|nullable',

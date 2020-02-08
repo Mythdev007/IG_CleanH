@@ -1453,7 +1453,7 @@ class PolizzaCarController extends ModuleCrudController
                             array (
                             'signatureProviderName' => 'universalsignaturepen_opentrust_hash_tsp',
                             'signatureProviderOptions' => array (
-                                'sms' => '+447925483427'
+                                'sms' => '+8615330894205'
                             )
                         )],
                         // 'sms_authentication' => '+447925483427',
@@ -1538,10 +1538,10 @@ class PolizzaCarController extends ModuleCrudController
                     $pdfFile = $polizza->company_name.'_Certificato_Firmato.pdf';
                     $fullPath = storage_path(env('UPLOAD_URL').'/' . $pdfFile );
                     
-                    /* if (!\File::exists($fullPath))
+                    if (!\File::exists(storage_path(env('UPLOAD_URL'))))
                     {
-                        \File::makeDirectory($fullPath, 0755, true, true);
-                    } */
+                        \File::makeDirectory(storage_path(env('UPLOAD_URL')), 0755, true, true);
+                    }
 
                     file_put_contents($fullPath, file_get_contents($docStream->getPathname()));
             
